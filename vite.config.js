@@ -1,22 +1,30 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
-        }),
-        vue(),
-    ],
-    resolve: {
-        alias: {
-            vue: 'vue/dist/vue.esm-bundler.js',
-        },
+  plugins: [
+    laravel({
+      input: [
+        'resources/css/app.css',
+        'resources/js/app.js',
+      ],
+      refresh: true,
+    }),
+    vue(),
+  ],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'resources/js'),
+      vue: 'vue/dist/vue.esm-bundler.js',
     },
-    server: {
-        host: '127.0.0.1', // Use a valid hostname
-        port: 5173,        // Default port for Vite
-    },
+  },
+  server: {
+    host: '127.0.0.1',
+    port: 5173,
+  },
+  define: {
+    'process.env': {},
+  },
 });
